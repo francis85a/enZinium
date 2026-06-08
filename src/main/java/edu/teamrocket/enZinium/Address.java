@@ -2,6 +2,7 @@ package edu.teamrocket.enZinium;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.KeyPair;
 
 public class Address {
 
@@ -36,6 +37,21 @@ public class Address {
 
     double getBalance(){
         return this.balance;
+    }
+
+    boolean isSKPresent(){
+        return this.getSK() != null;
+    }
+
+    public void generateKeyPair(){
+        KeyPair pair = GenSig.generateKeyPair();
+        this.setPK(pair.getPublic());
+        this.setSK(pair.getPrivate());
+
+    }
+
+    void transferEZI (double enziniums){
+        this.balance += enziniums;
     }
 
     
