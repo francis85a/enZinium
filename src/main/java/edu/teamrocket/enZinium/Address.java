@@ -39,7 +39,7 @@ public class Address {
         return this.balance;
     }
 
-    boolean isSKPresent(){
+    public boolean isSKpresent(){
         return this.getSK() != null;
     }
 
@@ -54,5 +54,17 @@ public class Address {
         this.balance += enziniums;
     }
 
-    
+    public void send(TokenContract contract, Double enziniums){
+        if(enziniums <= this.getBalance()){
+            contract.payable(this.getPK(), enziniums);
+            this.balance -= enziniums;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Address [PK=" + getPK() + ", SK=" + getSK() + ", balance=" + getBalance() +" symbol=" + symbol + "]";
+    }
+
+   
 }
