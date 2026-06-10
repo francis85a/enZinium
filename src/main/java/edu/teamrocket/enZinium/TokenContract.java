@@ -21,7 +21,6 @@ public class TokenContract{
         this.ownerPK = owner.getPK();
     }
 
-
     void setName(String name){
         this.name = name;
     }
@@ -33,8 +32,6 @@ public class TokenContract{
     void setTotalSupply(double totalSupply){
         this.totalSupply = totalSupply;
     }
-
-    
 
     public Address owner(){
         return this.owner;
@@ -60,7 +57,6 @@ public class TokenContract{
     void setTokenPrice(Double tokenPrice) {
         this.tokenPrice = tokenPrice;
     }   
-
 
     @Override
     public String toString() {
@@ -95,7 +91,9 @@ public class TokenContract{
     }
 
     void addOwner(PublicKey PK, Double units){
-        this.balances.put(PK, units);
+        if(!this.getBalances().containsKey(PK)){
+            this.getBalances().put(PK, units);
+        }
     }
 
     public Double balanceOf(PublicKey owner){
@@ -125,7 +123,7 @@ public class TokenContract{
     void payable (PublicKey recipient, Double enziniums){
         try {
             require(enziniums >= this.getTokenPrice());
-            Double units = Math.floor(enziniums / tokenPrice);
+            double units = Math.floor(enziniums / this.getTokenPrice());
             transfer(recipient, units);
             this.owner.transferEZI(enziniums);
 
