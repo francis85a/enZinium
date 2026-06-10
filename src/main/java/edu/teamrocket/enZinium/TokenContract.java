@@ -125,7 +125,7 @@ public class TokenContract{
             require(enziniums >= this.getTokenPrice());
             double units = Math.floor(enziniums / this.getTokenPrice());
             transfer(recipient, units);
-            this.owner.transferEZI(enziniums);
+            this.owner.transferEZI(units * this.getTokenPrice());
 
         } catch (InsufficientTokensException e) {
         }
