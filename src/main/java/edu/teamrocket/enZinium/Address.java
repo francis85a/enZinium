@@ -66,5 +66,27 @@ public class Address {
         return "Address [PK=" + getPK() + ", SK=" + getSK() + ", balance=" + getBalance() +" symbol=" + symbol + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((PK == null) ? 0 : PK.hashCode());
+        result = prime * result + ((SK == null) ? 0 : SK.hashCode());
+        long temp;
+        temp = Double.doubleToLongBits(balance);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        return true;
+    }
+
    
 }
