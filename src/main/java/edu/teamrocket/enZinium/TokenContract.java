@@ -71,7 +71,7 @@ public class TokenContract{
 
     void require (Boolean holds)throws InsufficientTokensException{
         if(!holds){
-            throw new InsufficientTokensException();
+            throw new InsufficientTokensException("No hay enziniums suficientes para realizar esta accion");
         }
     }
 
